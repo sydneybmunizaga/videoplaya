@@ -1,16 +1,20 @@
-import React from "react";
-import VideoItem from "./VideoItem";
+import React, { useState } from 'react'
 
-const VideoList = ({ videos }) => {
+import VideoUploader from './VideoUploader'
+import VideoManager from './VideoManager'
+import VideoStack from './VideoStack';
+
+const VideoContainer = () => {
+
+    const [videos, setVideos] = useState([]);
 
   return (
-    <div id="video-container">
-      {videos &&
-        videos.map((video) => (
-          <VideoItem key={video.name} file={video.name} type={video.type} />
-        ))}
-    </div>
-  );
-};
+      <div>
+          <VideoUploader videos={videos} setVideos={setVideos} />
+          <VideoManager videos={videos} />
+          <VideoStack videos={videos} />
+      </div>
+  )
+}
 
-export default VideoList;
+export default VideoContainer

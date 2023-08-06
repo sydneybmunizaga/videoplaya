@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './PlaylistCard.css';
-import VideoForm from './VideoForm';
+import VideoContainer from './VideoContainer';
 
 const PlaylistCard = ({
     playlistName,
@@ -11,6 +11,7 @@ const PlaylistCard = ({
 }) => {
     const [editing, setEditing] = useState(false);
     const [editedName, setEditedName] = useState(playlistName);
+    const [showProfile, setShowProfile] = useState(false)
 
     const handleEditPlaylist = (playlistName) => {
         if (!editingPlaylist) {
@@ -43,6 +44,10 @@ const PlaylistCard = ({
         setEditing(false)
     };
 
+    const handleSelect = () => {
+        setShowProfile(true)
+    }
+
     console.log('editing: ', editing)
     console.log('editingPlaylist: ', editingPlaylist)
 
@@ -59,20 +64,24 @@ const PlaylistCard = ({
                     <button onClick={handleCancel}>Cancel</button>
                 </div>
             ) : (
-                <>
-                    <h2>{playlistName}</h2>
-                    <div className="button-group">
-                        <button className="edit-button" onClick={() => handleEditPlaylist(playlistName)}>
-                            Edit Playlist
-                        </button>
-                        <button className="delete-button" onClick={handleDelete} disabled={editingPlaylist}>
-                            Delete Playlist
-                        </button>
-                    </div>
-                </>
+                    <div onClick={handleSelect}>
+                        <h2>{playlistName}</h2>
+                        {showProfile ? (
+                            <VideoContainer />
+                        ) : (
+                            <>
+                                <div className="button-group">
+                                    <button className="edit-button" onClick={() => handleEditPlaylist(playlistName)}>
+                                        Edit Playlist
+                                    </button>
+                                    <button className="delete-button" onClick={handleDelete} disabled={editingPlaylist}>
+                                        Delete Playlist
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                </div>
             )}
-
-            <VideoForm />
         </div>
     );
 };

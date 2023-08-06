@@ -6,10 +6,7 @@ const PlaylistForm = ({
     setPlaylists,
     playlistName,
     setPlaylistName,
-    setPlaylist,
-    // editingPlaylist,
-    // setEditingPlaylist,
-    // setEditing
+    setPlaylist
 }) => {
 
   const handlePlaylistNameChange = (event) => {
@@ -27,7 +24,7 @@ const PlaylistForm = ({
 
   return (
 
-        <div>
+        <div id="playlist-form">
           <form onSubmit={handlePlaylistSubmit}>
             <label>Playlist Name</label>
             <input
